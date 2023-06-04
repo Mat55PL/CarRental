@@ -6,9 +6,9 @@ namespace CarRentalAPI.Services;
 
 public class CarService : ICarService
 {
-    private readonly CarDBContext _carDbContext;
+    private readonly CarDbContext _carDbContext;
     
-    public CarService(CarDBContext context)
+    public CarService(CarDbContext context)
     {
         _carDbContext = context;
     }
@@ -39,9 +39,17 @@ public class CarService : ICarService
 
     public async Task<Car> AddCarAsync(Car newCar)
     {
-        _carDbContext.Cars.Add(newCar);
-        await _carDbContext.SaveChangesAsync();
-        return newCar;
+        try
+        {
+            _carDbContext.Cars.Add(newCar);
+            await _carDbContext.SaveChangesAsync();
+            return newCar;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred while adding a new car: {0}", e.Message);
+            throw;
+        }
     }
 
     public Task<Car> UpdateCarAsync(Car car)
