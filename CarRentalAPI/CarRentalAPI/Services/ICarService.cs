@@ -9,5 +9,5 @@ public interface ICarService
     Task<Car> AddCarAsync(Car car); // async ponieważ dodajemy do bazy danych i to może potrwać chwilę (np. 1s) i w tym czasie może być wykonywany inny kod
     Task<Car> UpdateCarAsync(Car car);
     Task<Car> DeleteCarAsync(int id);
-    Task<IEnumerable<Car>> GetAvailableCarsAsync();
+    Task<List<Car>> GetAvailableCarsAsync();
 }

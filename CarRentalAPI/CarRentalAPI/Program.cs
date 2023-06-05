@@ -9,7 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddScoped<ICarService, CarService>();
-builder.Services.AddDbContext<CarDbContext>(options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=CarRentalAPI;Trusted_Connection=True;"));
+builder.Services.AddScoped<IRentalService, RentalService>(); // dodajemy serwis do kontenera DI
+builder.Services.AddDbContext<CarRentalDbContext>(options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=CarRentalAPI;Trusted_Connection=True;"));
 
 
 builder.Services.AddEndpointsApiExplorer();

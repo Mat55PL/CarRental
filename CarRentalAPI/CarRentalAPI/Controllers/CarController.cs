@@ -29,4 +29,19 @@ public class CarController : ControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError, e.Message); // ogólny błąd serwera
         }
     }
+    
+    [HttpGet]
+    [Route("GetAvailableCars")]
+    public async Task<ActionResult<IEnumerable<Car>>> GetAvailableCars()
+    {
+        try
+        {
+            var cars = await _carService.GetAvailableCarsAsync();
+            return Ok(cars);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, e.Message); // ogólny błąd serwera
+        }
+    }
 }

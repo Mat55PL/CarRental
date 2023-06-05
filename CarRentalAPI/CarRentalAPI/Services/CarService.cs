@@ -6,18 +6,18 @@ namespace CarRentalAPI.Services;
 
 public class CarService : ICarService
 {
-    private readonly CarDbContext _carDbContext;
-    
-    public CarService(CarDbContext context)
+    private readonly CarRentalDbContext _carRentalDbContext;
+
+    public CarService(CarRentalDbContext context)
     {
-        _carDbContext = context;
+        _carRentalDbContext = context;
     }
 
     public async Task<IEnumerable<Car>> GetAllCarsAsync()
     {
         try
         {
-            return await _carDbContext.Cars.ToListAsync();
+            return await _carRentalDbContext.Cars.ToListAsync();
         }
         catch (Exception e)
         {
@@ -29,7 +29,7 @@ public class CarService : ICarService
     {
         try
         {
-            return await _carDbContext.Cars.FindAsync(id);
+            return await _carRentalDbContext.Cars.FindAsync(id);
         }
         catch (Exception e)
         {
@@ -41,8 +41,8 @@ public class CarService : ICarService
     {
         try
         {
-            _carDbContext.Cars.Add(newCar);
-            await _carDbContext.SaveChangesAsync();
+            _carRentalDbContext.Cars.Add(newCar);
+            await _carRentalDbContext.SaveChangesAsync();
             return newCar;
         }
         catch (Exception e)
@@ -62,8 +62,15 @@ public class CarService : ICarService
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<Car>> GetAvailableCarsAsync()
+    public Task<List<Car>> GetAvailableCarsAsync()
     {
-        throw new NotImplementedException();
+        try
+        {
+            return _carRentalDbContext.Cars.Where(c => c.IsAvailable).ToListAsync();
+        }
+        catch (Exception e)
+        {
+            throw new Exception($"An error occurred while retrieving available cars: {e.Message}");
+        }
     }
 }
