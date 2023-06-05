@@ -12,6 +12,16 @@ builder.Services.AddScoped<ICarService, CarService>();
 builder.Services.AddScoped<IRentalService, RentalService>(); // dodajemy serwis do kontenera DI
 builder.Services.AddDbContext<CarRentalDbContext>(options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=CarRentalAPI;Trusted_Connection=True;"));
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        corsPolicyBuilder =>
+        {
+            corsPolicyBuilder.WithOrigins("http://localhost:3000")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -24,6 +34,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors();
 
 app.UseAuthorization();
 
