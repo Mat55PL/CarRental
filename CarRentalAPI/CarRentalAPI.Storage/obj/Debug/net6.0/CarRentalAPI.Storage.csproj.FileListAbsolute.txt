@@ -1,0 +1,12 @@
+G:\Git\CarRental\CarRentalAPI\CarRentalAPI.Storage\bin\Debug\net6.0\CarRentalAPI.Storage.deps.json
+G:\Git\CarRental\CarRentalAPI\CarRentalAPI.Storage\bin\Debug\net6.0\CarRentalAPI.Storage.dll
+G:\Git\CarRental\CarRentalAPI\CarRentalAPI.Storage\bin\Debug\net6.0\CarRentalAPI.Storage.pdb
+G:\Git\CarRental\CarRentalAPI\CarRentalAPI.Storage\obj\Debug\net6.0\CarRentalAPI.Storage.csproj.AssemblyReference.cache
+G:\Git\CarRental\CarRentalAPI\CarRentalAPI.Storage\obj\Debug\net6.0\CarRentalAPI.Storage.GeneratedMSBuildEditorConfig.editorconfig
+G:\Git\CarRental\CarRentalAPI\CarRentalAPI.Storage\obj\Debug\net6.0\CarRentalAPI.Storage.AssemblyInfoInputs.cache
+G:\Git\CarRental\CarRentalAPI\CarRentalAPI.Storage\obj\Debug\net6.0\CarRentalAPI.Storage.AssemblyInfo.cs
+G:\Git\CarRental\CarRentalAPI\CarRentalAPI.Storage\obj\Debug\net6.0\CarRentalAPI.Storage.csproj.CoreCompileInputs.cache
+G:\Git\CarRental\CarRentalAPI\CarRentalAPI.Storage\obj\Debug\net6.0\CarRentalAPI.Storage.dll
+G:\Git\CarRental\CarRentalAPI\CarRentalAPI.Storage\obj\Debug\net6.0\refint\CarRentalAPI.Storage.dll
+G:\Git\CarRental\CarRentalAPI\CarRentalAPI.Storage\obj\Debug\net6.0\CarRentalAPI.Storage.pdb
+G:\Git\CarRental\CarRentalAPI\CarRentalAPI.Storage\obj\Debug\net6.0\ref\CarRentalAPI.Storage.dll

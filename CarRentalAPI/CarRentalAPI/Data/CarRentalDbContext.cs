@@ -1,4 +1,4 @@
-﻿using CarRentalAPI.Models;
+﻿using CarRentalAPI.Storage.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarRentalAPI.Data;

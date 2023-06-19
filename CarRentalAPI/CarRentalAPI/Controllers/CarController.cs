@@ -1,6 +1,6 @@
 ﻿using CarRentalAPI.Data;
-using CarRentalAPI.Models;
 using CarRentalAPI.Services;
+using CarRentalAPI.Storage.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRentalAPI.Controllers;
@@ -37,6 +37,36 @@ public class CarController : ControllerBase
         try
         {
             var cars = await _carService.GetAvailableCarsAsync();
+            return Ok(cars);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, e.Message); // ogólny błąd serwera
+        }
+    }
+    
+    [HttpGet]
+    [Route("GetAvailableCarsByDateRange")]
+    public async Task<ActionResult<IEnumerable<Car>>> GetAvailableCarsByDateRange(DateTime startDate, DateTime endDate)
+    {
+        try
+        {
+            var cars = await _carService.GetAvailableCarsByDateRangeAsync(startDate, endDate);
+            return Ok(cars);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, e.Message); // ogólny błąd serwera
+        }
+    }
+    
+    [HttpGet]
+    [Route("GetAvailableCarsByFuelTypeAndDateRange")]
+    public async Task<ActionResult<IEnumerable<Car>>> GetAvailableCarsByFuelTypeAndDateRange(FuelType fuelType, DateTime startDate, DateTime endDate)
+    {
+        try
+        {
+            var cars = await _carService.GetAvailableCarsByFuelTypeAndDateRangeAsync(fuelType, startDate, endDate);
             return Ok(cars);
         }
         catch (Exception e)

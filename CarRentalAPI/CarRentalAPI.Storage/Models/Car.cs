@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CarRentalAPI.Models;
+namespace CarRentalAPI.Storage.Models;
 
 public class Car
 {

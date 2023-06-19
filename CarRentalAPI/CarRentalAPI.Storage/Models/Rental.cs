@@ -1,4 +1,4 @@
-﻿namespace CarRentalAPI.Models;
+﻿namespace CarRentalAPI.Storage.Models;
 
 public class Rental
 {

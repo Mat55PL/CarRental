@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using CarRentalAPI.Models;
+using CarRentalAPI.Storage.Models;
 
 namespace CarRentalAPI.Services;
 

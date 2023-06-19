@@ -1,5 +1,5 @@
 ﻿using CarRentalAPI.Data;
-using CarRentalAPI.Models;
+using CarRentalAPI.Storage.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarRentalAPI.Services;

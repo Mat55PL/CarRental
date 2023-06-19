@@ -1,4 +1,4 @@
-﻿using CarRentalAPI.Models;
+﻿using CarRentalAPI.Storage.Models;
 
 namespace CarRentalAPI.Services;
 
@@ -10,4 +10,6 @@ public interface ICarService
     Task<Car> UpdateCarAsync(Car car);
     Task<Car> DeleteCarAsync(int id);
     Task<List<Car>> GetAvailableCarsAsync();
+    Task<List<Car>> GetAvailableCarsByDateRangeAsync(DateTime startDate, DateTime endDate);
+    Task<IEnumerable<Car>> GetAvailableCarsByFuelTypeAndDateRangeAsync(FuelType fuelType, DateTime startDate, DateTime endDate);
 }

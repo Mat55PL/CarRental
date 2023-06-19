@@ -1242,6 +1242,16 @@
             "rid": "win"
           }
         }
+      },
+      "CarRentalAPI.Storage/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/CarRentalAPI.Storage.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CarRentalAPI.Storage.dll": {}
+        }
       }
     }
   },
@@ -3712,10 +3722,16 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "CarRentalAPI.Storage/1.0.0": {
+      "type": "project",
+      "path": "../CarRentalAPI.Storage/CarRentalAPI.Storage.csproj",
+      "msbuildProject": "../CarRentalAPI.Storage/CarRentalAPI.Storage.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "CarRentalAPI.Storage >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 7.0.5",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.5",
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.5",
@@ -3748,12 +3764,17 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "G:\\Git\\CarRental\\CarRentalAPI\\CarRentalAPI.Storage\\CarRentalAPI.Storage.csproj": {
+              "projectPath": "G:\\Git\\CarRental\\CarRentalAPI\\CarRentalAPI.Storage\\CarRentalAPI.Storage.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -3804,7 +3825,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,5 +1,5 @@
-﻿using CarRentalAPI.Models;
-using CarRentalAPI.Services;
+﻿using CarRentalAPI.Services;
+using CarRentalAPI.Storage.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRentalAPI.Controllers;
