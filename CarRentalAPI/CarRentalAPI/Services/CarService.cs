@@ -54,7 +54,28 @@ public class CarService : ICarService
 
     public Task<Car> UpdateCarAsync(Car car)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var carToUpdate = _carRentalDbContext.Cars.Find(car.Id);
+            if (carToUpdate == null)
+            {
+                throw new Exception($"Car with ID[{car.Id}] not found");
+            }
+
+            carToUpdate.Brand = car.Brand;
+            carToUpdate.Model = car.Model;
+            carToUpdate.Year = car.Year;
+            carToUpdate.PricePerDay = car.PricePerDay;
+            carToUpdate.Color = car.Color;
+            carToUpdate.FuelType = car.FuelType;
+            carToUpdate.IsAvailable = car.IsAvailable;
+            _carRentalDbContext.SaveChanges();
+            return Task.FromResult(carToUpdate);
+        }
+        catch (Exception e)
+        {
+            throw new Exception($"An error occurred while updating car with ID {car.Id}: {e.Message}");
+        }
     }
 
     public Task<Car> DeleteCarAsync(int id)
