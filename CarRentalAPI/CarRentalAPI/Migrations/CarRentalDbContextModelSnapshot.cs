@@ -22,7 +22,7 @@ namespace CarRentalAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CarRentalAPI.Models.Car", b =>
+            modelBuilder.Entity("CarRentalAPI.Storage.Models.Car", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -131,7 +131,7 @@ namespace CarRentalAPI.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CarRentalAPI.Models.Rental", b =>
+            modelBuilder.Entity("CarRentalAPI.Storage.Models.Rental", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -148,6 +148,9 @@ namespace CarRentalAPI.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CarId");
@@ -160,13 +163,54 @@ namespace CarRentalAPI.Migrations
                             Id = 1,
                             CarId = 5,
                             EndDate = new DateTime(2021, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = 2
                         });
                 });
 
-            modelBuilder.Entity("CarRentalAPI.Models.Rental", b =>
+            modelBuilder.Entity("CarRentalAPI.Storage.Models.User", b =>
                 {
-                    b.HasOne("CarRentalAPI.Models.Car", "Car")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Rank")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            PasswordHash = "admin",
+                            Rank = 1,
+                            UserName = "admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            PasswordHash = "user",
+                            Rank = 2,
+                            UserName = "user"
+                        });
+                });
+
+            modelBuilder.Entity("CarRentalAPI.Storage.Models.Rental", b =>
+                {
+                    b.HasOne("CarRentalAPI.Storage.Models.Car", "Car")
                         .WithMany()
                         .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)

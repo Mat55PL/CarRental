@@ -33,12 +33,28 @@ namespace CarRentalAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Rank = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Rentals",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CarId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -67,9 +83,18 @@ namespace CarRentalAPI.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "PasswordHash", "Rank", "UserName" },
+                values: new object[,]
+                {
+                    { 1, "admin", 1, "admin" },
+                    { 2, "user", 2, "user" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Rentals",
-                columns: new[] { "Id", "CarId", "EndDate", "StartDate" },
-                values: new object[] { 1, 5, new DateTime(2021, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                columns: new[] { "Id", "CarId", "EndDate", "StartDate", "UserId" },
+                values: new object[] { 1, 5, new DateTime(2021, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rentals_CarId",
@@ -82,6 +107,9 @@ namespace CarRentalAPI.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Rentals");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Cars");

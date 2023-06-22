@@ -7,7 +7,7 @@ public class CarRentalDbContext : DbContext
 {
     public DbSet<Car> Cars { get; set; }
     public DbSet<Rental> Rentals { get; set; }
-
+    public DbSet<User> Users { get; set; }
     public CarRentalDbContext(DbContextOptions<CarRentalDbContext> options) : base(options)
     {
     }
@@ -61,7 +61,19 @@ public class CarRentalDbContext : DbContext
             .HasData(
                 new Rental
                 {
-                    Id = 1, CarId = 5, StartDate = new DateTime(2021, 1, 1), EndDate = new DateTime(2021, 1, 3)
+                    Id = 1, UserId = 2, CarId = 5, StartDate = new DateTime(2021, 1, 1), EndDate = new DateTime(2021, 1, 3)
+                }
+            );
+
+        modelBuilder.Entity<User>()
+            .HasData(
+                new User
+                {
+                    Id = 1, UserName = "admin", PasswordHash = "admin", Rank = UserRank.Admin
+                },
+                new User
+                {
+                    Id = 2, UserName = "user", PasswordHash = "user", Rank = UserRank.User
                 }
             );
     }
