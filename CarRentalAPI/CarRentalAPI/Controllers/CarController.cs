@@ -45,6 +45,19 @@ public class CarController : ControllerBase
         }
     }
     
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Car>> GetCarById(int id)
+    {
+        var car = await _carService.GetCarByIdAsync(id);
+
+        if (car == null)
+        {
+            return NotFound();
+        }
+
+        return car;
+    }
+    
     [HttpGet]
     [Route("GetAvailableCarsByDateRange")]
     public async Task<ActionResult<IEnumerable<Car>>> GetAvailableCarsByDateRange(DateTime startDate, DateTime endDate)
@@ -74,4 +87,63 @@ public class CarController : ControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError, e.Message); // ogólny błąd serwera
         }
     }
+    
+    [HttpDelete]
+    [Route("DeleteCar")]
+    public async Task<ActionResult<Car>> DeleteCar(int id)
+    {
+        try
+        {
+            var carToDelete = await _carService.GetCarByIdAsync(id);
+            if (carToDelete == null)
+            {
+                return NotFound($"Car with ID = {id} not found");
+            }
+            return await _carService.DeleteCarAsync(id);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, e.Message); // ogólny błąd serwera
+        }
+    }
+    
+    [HttpPost]
+    [Route("AddCar")]
+    public async Task<ActionResult<Car>> AddCar(Car car)
+    {
+        try
+        {
+            if (car == null)
+            {
+                return BadRequest();
+            }
+            car.Id = 0; // zabezpieczenie przed podaniem ID przez użytkownika
+            var createdCar = await _carService.AddCarAsync(car);
+            return CreatedAtAction(nameof(GetCarById), new {id = createdCar.Id}, createdCar);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, e.Message); // ogólny błąd serwera
+        }
+    }
+    
+    [HttpPut]
+    [Route("UpdateCar")]
+    public async Task<ActionResult<Car>> UpdateCar(Car car)
+    {
+        try
+        {
+            var carToUpdate = await _carService.GetCarByIdAsync(car.Id);
+            if (carToUpdate == null)
+            {
+                return NotFound($"Car with ID = {car.Id} not found");
+            }
+            return await _carService.UpdateCarAsync(car);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, e.Message); // ogólny błąd serwera
+        }
+    }
+
 }
