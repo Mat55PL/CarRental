@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRentalAPI.Migrations
 {
     [DbContext(typeof(CarRentalDbContext))]
-    [Migration("20230626130848_CarRentalMG")]
+    [Migration("20230626163452_CarRentalMG")]
     partial class CarRentalMG
     {
         /// <inheritdoc />
@@ -168,8 +168,6 @@ namespace CarRentalAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CarId");
-
                     b.ToTable("Rentals");
 
                     b.HasData(
@@ -224,17 +222,6 @@ namespace CarRentalAPI.Migrations
                             Rank = 2,
                             UserName = "user"
                         });
-                });
-
-            modelBuilder.Entity("CarRentalAPI.Storage.Models.Rental", b =>
-                {
-                    b.HasOne("CarRentalAPI.Storage.Models.Car", "Car")
-                        .WithMany()
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Car");
                 });
 #pragma warning restore 612, 618
         }

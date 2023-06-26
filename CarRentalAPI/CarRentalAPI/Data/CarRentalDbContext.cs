@@ -53,11 +53,6 @@ public class CarRentalDbContext : DbContext
             );
 
         modelBuilder.Entity<Rental>()
-            .HasOne(r => r.Car)
-            .WithMany()
-            .HasForeignKey(r => r.CarId);
-
-        modelBuilder.Entity<Rental>()
             .HasData(
                 new Rental
                 {

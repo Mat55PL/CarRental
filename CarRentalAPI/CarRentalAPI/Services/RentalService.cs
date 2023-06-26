@@ -42,6 +42,15 @@ public class RentalService : IRentalService
     {
         try
         {
+            //sprawdzenie czy nie ma rezerwacji w tym samym czasie na to auto
+            var carRentals = await _carRentalDbContext.Rentals
+                .Where(r => r.CarId == rental.CarId)
+                .Where(r => r.StartDate <= rental.EndDate && r.EndDate >= rental.StartDate)
+                .ToListAsync();
+            if (carRentals.Any())
+            {
+                throw new Exception($"Car with ID {rental.CarId} is already reserved in this time range");
+            }
             _carRentalDbContext.Rentals.Add(rental);
             await _carRentalDbContext.SaveChangesAsync();
             return await Task.FromResult(rental);
@@ -67,7 +76,7 @@ public class RentalService : IRentalService
         try
         {
             return await _carRentalDbContext.Rentals
-                .Include(r => r.Car)
+                .Include(r => r.CarId)
                 .Where(r => r.CarId == carId)
                 .ToListAsync();
         }
@@ -83,7 +92,7 @@ public class RentalService : IRentalService
         try
         {
             return await _carRentalDbContext.Rentals
-                .Include(r => r.Car)
+                .Include(r => r.CarId)
                 .Where(r => r.StartDate >= startDate && r.EndDate <= endDate)
                 .ToListAsync();
         }
