@@ -38,9 +38,18 @@ public class RentalService : IRentalService
         }
     }
 
-    public Task<Rental> AddRentalAsync(Rental rental)
+    public async Task<Rental> AddRentalAsync(Rental rental)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _carRentalDbContext.Rentals.Add(rental);
+            await _carRentalDbContext.SaveChangesAsync();
+            return await Task.FromResult(rental);
+        }
+        catch (Exception e)
+        {
+            throw new Exception($"An error occurred while adding a new rental: ${e.Message}");
+        }
     }
 
     public Task<Rental> UpdateRentalAsync(Rental rental)

@@ -61,7 +61,7 @@ public class CarRentalDbContext : DbContext
             .HasData(
                 new Rental
                 {
-                    Id = 1, UserId = 2, CarId = 5, StartDate = new DateTime(2021, 1, 1), EndDate = new DateTime(2021, 1, 3)
+                    Id = 1,CustomerEmail = "test@gmail.com", CustomerLastName = "Testowy", CustomerFirstName = "Test", UserId = 2, CarId = 5, StartDate = new DateTime(2021, 1, 1), EndDate = new DateTime(2021, 1, 3)
                 }
             );
 

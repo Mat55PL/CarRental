@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRentalAPI.Migrations
 {
     [DbContext(typeof(CarRentalDbContext))]
-    [Migration("20230622104959_CarRentalMG")]
+    [Migration("20230626130848_CarRentalMG")]
     partial class CarRentalMG
     {
         /// <inheritdoc />
@@ -145,13 +145,25 @@ namespace CarRentalAPI.Migrations
                     b.Property<int>("CarId")
                         .HasColumnType("int");
 
+                    b.Property<string>("CustomerEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerFirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerLastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -165,6 +177,9 @@ namespace CarRentalAPI.Migrations
                         {
                             Id = 1,
                             CarId = 5,
+                            CustomerEmail = "test@gmail.com",
+                            CustomerFirstName = "Test",
+                            CustomerLastName = "Testowy",
                             EndDate = new DateTime(2021, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StartDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 2

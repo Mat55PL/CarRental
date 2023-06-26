@@ -54,7 +54,10 @@ namespace CarRentalAPI.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CarId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true),
+                    CustomerFirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CustomerLastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CustomerEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -93,8 +96,8 @@ namespace CarRentalAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "Rentals",
-                columns: new[] { "Id", "CarId", "EndDate", "StartDate", "UserId" },
-                values: new object[] { 1, 5, new DateTime(2021, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 });
+                columns: new[] { "Id", "CarId", "CustomerEmail", "CustomerFirstName", "CustomerLastName", "EndDate", "StartDate", "UserId" },
+                values: new object[] { 1, 5, "test@gmail.com", "Test", "Testowy", new DateTime(2021, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rentals_CarId",
